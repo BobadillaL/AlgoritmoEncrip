@@ -9,9 +9,9 @@ package algoritmoencriptado;
  *
  * @author luna
  */
-public abstract class AlgoritmoVigenere extends Codes{
+public abstract class AlgoritmoVigenere implements Encrypting{
 
-    private static char [] alphabet = Codes.getAlphabet();
+    private static char [] alphabet = Encrypting.alphabet;
     private static String sentence, sentenceKey;
     private static String result;
     
@@ -19,33 +19,30 @@ public abstract class AlgoritmoVigenere extends Codes{
     public AlgoritmoVigenere(String sentence, String sentenceKey) {
         
         this.sentence = sentence;
-       
-        char [] characters = sentence.toCharArray();
-        
-        char [] charactersKey = sentenceKey.toCharArray();
-        
-        result = code(characters, charactersKey);
+        this.sentenceKey = sentenceKey;
     }
   
     
 //    Transformo la cadena recibida en un arreglo de caracteres, para 
 //    luego cifrar letra por la letra
-    public String code(char[] characters, char[] charactersKey){
-   
+    public String code(){
+  
+        char[] characters = sentence.toCharArray();
+        char[] charactersKey = sentenceKey.toCharArray();      
+       
         char[] resul = characters.clone();
-        
         char[] key = completeKey(characters, charactersKey);
         
         for(int i = 0; i< characters.length; i++){
-            resul[i]= transform(characters[i], key[i]);
+            resul[i]= transformCode(characters[i], key[i]);
         }
         
-        return String.valueOf(resul);
+        return result = String.valueOf(resul);
     }
 
 //    Busco la letra recibida en el abecedario, aplico el 
 //    corrimiento y devuelvo el nuevo valor    
-    private static char transform(char letter, char letterKey) {
+    private static char transformCode(char letter, char letterKey) {
         
         int key = searchPosition(letterKey);
         
@@ -62,6 +59,45 @@ public abstract class AlgoritmoVigenere extends Codes{
         
     }
 
+    
+//    Busco la letra recibida en el abecedario, aplico el 
+//    corrimiento y devuelvo el nuevo valor    
+    private static char transformDecrypt(char letter, char letterKey) {
+        
+        int key = searchPosition(letterKey);
+        
+        for(int i = 0; i< alphabet.length; i++) 
+           if(alphabet[i] == letter)
+               if((i-key >= 0))
+                   //retorno la nueva letra, aplicando el corrimiento
+                   return alphabet[i-key];
+               // retorno la nueva letra, aplicando el corrimiento y abarcando
+               // el caso en el que la suma de la clave mas la posicion de la 
+               // letra en el abecedario supere 26 (debo volver al principio) 
+               else return alphabet[alphabet.length+(i-key)];
+        return ' ';
+        
+    }
+    
+//    Transformo la cadena recibida en un arreglo de caracteres, para 
+//    luego desifrar letra por la letra
+    public String decrypt(){
+     
+        char[] characters = sentence.toCharArray();
+        char[] charactersKey = sentenceKey.toCharArray();      
+       
+        char[] resul = characters.clone();
+        char[] key = completeKey(characters, charactersKey);
+        
+        for(int i = 0; i< characters.length; i++){
+            resul[i]= transformDecrypt(characters[i], key[i]);
+        }
+        
+        return result = String.valueOf(resul);
+    }
+    
+    
+    
     //Busco la posicion del caracter de clave para aplicar corrimiento
     public static int searchPosition(char letterKey){
     
@@ -81,7 +117,6 @@ public abstract class AlgoritmoVigenere extends Codes{
         
         return keyComplete;
     }
-    
     
     @Override
     public String toString() {

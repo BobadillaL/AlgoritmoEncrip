@@ -7,6 +7,7 @@ package view;
 
 import algoritmoencriptado.AlgoritmoCesar;
 import algoritmoencriptado.AlgoritmoVigenere;
+import java.awt.event.ActionEvent;
 
 /**
  *
@@ -16,13 +17,12 @@ public class View extends javax.swing.JFrame {
 
     private AlgoritmoCesar c;
     private AlgoritmoVigenere v;
-    
-    
-    
+
     /**
      * Creates new form ViewCaesar
      */
     public View() {
+        this.setTitle("TRABAJO PRACTICO N°1 - ALGORITMOS DE ENCRIPTACION");
         initComponents();
     }
 
@@ -35,6 +35,7 @@ public class View extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        buttonGroup1 = new javax.swing.ButtonGroup();
         panelPrincipal = new javax.swing.JPanel();
         labelMessage = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
@@ -44,10 +45,16 @@ public class View extends javax.swing.JFrame {
         jScrollPane2 = new javax.swing.JScrollPane();
         textAreaResultMessage = new javax.swing.JTextArea();
         textFieldKey = new javax.swing.JTextField();
-        labelKey = new javax.swing.JLabel();
-        labelCesar = new javax.swing.JLabel();
-        labelVigenere = new javax.swing.JLabel();
         codeButtonVigenere = new javax.swing.JButton();
+        radioButtonCesar = new javax.swing.JRadioButton();
+        radioButtonVigenere = new javax.swing.JRadioButton();
+        panel2 = new javax.swing.JPanel();
+        labelAlgoritmo = new javax.swing.JLabel();
+        labelKey = new javax.swing.JLabel();
+        labelAccion = new javax.swing.JLabel();
+        comboBoxKey = new javax.swing.JComboBox();
+        decryptButtonCesar = new javax.swing.JButton();
+        decryptButtonVigenere = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -70,16 +77,72 @@ public class View extends javax.swing.JFrame {
         textAreaResultMessage.setRows(5);
         jScrollPane2.setViewportView(textAreaResultMessage);
 
-        labelKey.setText("Clave");
-
-        labelCesar.setText("Cesar");
-
-        labelVigenere.setText("Vigenere");
-
         codeButtonVigenere.setText("Cifrar");
         codeButtonVigenere.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 codeButtonVigenereActionPerformed(evt);
+            }
+        });
+
+        radioButtonCesar.setText("Cesar");
+        radioButtonCesar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                radioButtonCesarActionPerformed(evt);
+            }
+        });
+
+        radioButtonVigenere.setText("Vigenere");
+        radioButtonVigenere.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                radioButtonVigenereActionPerformed(evt);
+            }
+        });
+
+        panel2.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+
+        labelAlgoritmo.setText("Algoritmo");
+
+        labelKey.setText("Clave");
+
+        labelAccion.setText("Accion");
+
+        javax.swing.GroupLayout panel2Layout = new javax.swing.GroupLayout(panel2);
+        panel2.setLayout(panel2Layout);
+        panel2Layout.setHorizontalGroup(
+            panel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panel2Layout.createSequentialGroup()
+                .addGap(27, 27, 27)
+                .addComponent(labelAlgoritmo)
+                .addGap(158, 158, 158)
+                .addComponent(labelKey)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(labelAccion)
+                .addGap(68, 68, 68))
+        );
+        panel2Layout.setVerticalGroup(
+            panel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panel2Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(panel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(labelAlgoritmo)
+                    .addComponent(labelKey)
+                    .addComponent(labelAccion))
+                .addContainerGap())
+        );
+
+        comboBoxKey.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27" }));
+
+        decryptButtonCesar.setText("Descifrar");
+        decryptButtonCesar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                decryptButtonCesarActionPerformed(evt);
+            }
+        });
+
+        decryptButtonVigenere.setText("Descifrar");
+        decryptButtonVigenere.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                decryptButtonVigenereActionPerformed(evt);
             }
         });
 
@@ -90,54 +153,67 @@ public class View extends javax.swing.JFrame {
             .addGroup(panelPrincipalLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(panelPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(labelResult)
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(panelPrincipalLayout.createSequentialGroup()
                         .addGroup(panelPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(labelMessage))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                            .addComponent(labelMessage)
+                            .addGroup(panelPrincipalLayout.createSequentialGroup()
+                                .addGap(28, 28, 28)
+                                .addGroup(panelPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(radioButtonVigenere)
+                                    .addComponent(radioButtonCesar))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 87, Short.MAX_VALUE)
+                                .addGroup(panelPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(comboBoxKey, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(textFieldKey, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(59, 59, 59)
+                                .addGroup(panelPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(codeButtonVigenere, javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(codeButtonCesar, javax.swing.GroupLayout.Alignment.TRAILING))))
                         .addGroup(panelPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(labelKey)
-                            .addComponent(textFieldKey, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(codeButtonVigenere)
-                            .addComponent(codeButtonCesar)
                             .addGroup(panelPrincipalLayout.createSequentialGroup()
-                                .addGap(61, 61, 61)
-                                .addComponent(labelCesar))
-                            .addGroup(panelPrincipalLayout.createSequentialGroup()
-                                .addGap(49, 49, 49)
-                                .addComponent(labelVigenere)))))
-                .addContainerGap(35, Short.MAX_VALUE))
+                                .addGap(32, 32, 32)
+                                .addComponent(decryptButtonCesar))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelPrincipalLayout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(decryptButtonVigenere))))
+                    .addComponent(panel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(panelPrincipalLayout.createSequentialGroup()
+                        .addComponent(labelResult)
+                        .addGap(0, 0, Short.MAX_VALUE)))
+                .addContainerGap())
         );
         panelPrincipalLayout.setVerticalGroup(
             panelPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelPrincipalLayout.createSequentialGroup()
                 .addGap(33, 33, 33)
+                .addComponent(labelMessage)
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(panel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(panelPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(labelMessage)
-                    .addComponent(labelKey))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(panelPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(radioButtonCesar)
+                    .addComponent(codeButtonCesar)
+                    .addComponent(comboBoxKey, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(decryptButtonCesar))
+                .addGroup(panelPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(panelPrincipalLayout.createSequentialGroup()
-                        .addComponent(textFieldKey, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGroup(panelPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(panelPrincipalLayout.createSequentialGroup()
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(labelCesar))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelPrincipalLayout.createSequentialGroup()
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(codeButtonCesar)))))
-                .addGap(10, 10, 10)
-                .addComponent(labelVigenere)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(codeButtonVigenere)
-                .addGap(5, 5, 5)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(radioButtonVigenere))
+                    .addGroup(panelPrincipalLayout.createSequentialGroup()
+                        .addGap(3, 3, 3)
+                        .addGroup(panelPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(codeButtonVigenere)
+                            .addComponent(textFieldKey, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(decryptButtonVigenere))))
+                .addGap(18, 18, 18)
                 .addComponent(labelResult)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 12, Short.MAX_VALUE)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(30, Short.MAX_VALUE))
+                .addGap(45, 45, 45))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -156,33 +232,92 @@ public class View extends javax.swing.JFrame {
 
     private void codeButtonCesarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_codeButtonCesarActionPerformed
         // TODO add your handling code here:
-        if(evt.getSource() == codeButtonCesar){
-          c = new AlgoritmoCesar(textAreaMessage.getText(), Integer.parseInt(textFieldKey.getText())) {
-
-              @Override
-              public String code(char[] characters, char[] characteresKey) {
-                  throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-              }
-          };
+        if (evt.getSource() == codeButtonCesar) {
+            c = new AlgoritmoCesar(textAreaMessage.getText(), Integer.parseInt(comboBoxKey.getSelectedItem().toString())) {};
+            c.code();
         }
         textAreaResultMessage.setText(c.toString());
     }//GEN-LAST:event_codeButtonCesarActionPerformed
 
     private void codeButtonVigenereActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_codeButtonVigenereActionPerformed
         // TODO add your handling code here:
-        if(evt.getSource() == codeButtonVigenere){
-          v = new AlgoritmoVigenere(textAreaMessage.getText(), textFieldKey.getText()) {
-
-              @Override
-              public String code(char[] characters, int key) {
-                  throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-              }
-          };
+        if (evt.getSource() == codeButtonVigenere) {
+            v = new AlgoritmoVigenere(textAreaMessage.getText(), textFieldKey.getText()) {};
+            v.code();
         }
         textAreaResultMessage.setText(v.toString());
-        
+
     }//GEN-LAST:event_codeButtonVigenereActionPerformed
-    
+
+    private void radioButtonCesarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_radioButtonCesarActionPerformed
+        // TODO add your handling code here:
+        if (radioButtonCesar.isSelected()) {
+            toblock(evt);
+        } else if (!radioButtonCesar.isSelected()) {
+            tounlock(evt);
+        }
+    }//GEN-LAST:event_radioButtonCesarActionPerformed
+
+    private void radioButtonVigenereActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_radioButtonVigenereActionPerformed
+        // TODO add your handling code here:
+        if (radioButtonVigenere.isSelected()) {
+            toblock(evt);
+        } else if (!radioButtonVigenere.isSelected()) {
+            tounlock(evt);
+        }
+    }//GEN-LAST:event_radioButtonVigenereActionPerformed
+
+    private void decryptButtonCesarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_decryptButtonCesarActionPerformed
+        // TODO add your handling code here:
+        if (evt.getSource() == decryptButtonCesar) {
+            c = new AlgoritmoCesar(textAreaMessage.getText(), Integer.parseInt(comboBoxKey.getSelectedItem().toString())) {};
+            c.decrypt();
+        }
+        textAreaResultMessage.setText(c.toString());
+        
+    }//GEN-LAST:event_decryptButtonCesarActionPerformed
+
+    private void decryptButtonVigenereActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_decryptButtonVigenereActionPerformed
+        // TODO add your handling code here:
+        if (evt.getSource() == decryptButtonVigenere) {
+            v = new AlgoritmoVigenere(textAreaMessage.getText(), textFieldKey.getText()) {};
+            v.decrypt();
+        }
+        textAreaResultMessage.setText(v.toString());
+
+    }//GEN-LAST:event_decryptButtonVigenereActionPerformed
+
+    private void toblock(ActionEvent evt) {
+
+        if (evt.getSource() == radioButtonCesar) {
+            radioButtonVigenere.setEnabled(false);
+            textFieldKey.setEnabled(false);
+            codeButtonVigenere.setEnabled(false);
+            decryptButtonVigenere.setEnabled(false);
+        } else if (evt.getSource() == radioButtonVigenere) {
+            radioButtonCesar.setEnabled(false);
+            comboBoxKey.setEnabled(false);
+            codeButtonCesar.setEnabled(false);
+            decryptButtonCesar.setEnabled(false);
+        }
+    }
+
+    private void tounlock(ActionEvent evt) {
+
+        if (evt.getSource() == radioButtonCesar) {
+            radioButtonVigenere.setEnabled(true);
+            textFieldKey.setEnabled(true);
+            codeButtonVigenere.setEnabled(true);
+            decryptButtonVigenere.setEnabled(true);
+        } else if (evt.getSource() == radioButtonVigenere) {
+            radioButtonCesar.setEnabled(true);
+            comboBoxKey.setEnabled(true);
+            codeButtonCesar.setEnabled(true);
+            decryptButtonCesar.setEnabled(true);
+        }
+
+    }
+
     /**
      * @param args the command line arguments
      */
@@ -220,18 +355,26 @@ public class View extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JButton codeButtonCesar;
     private javax.swing.JButton codeButtonVigenere;
+    private javax.swing.JComboBox comboBoxKey;
+    private javax.swing.JButton decryptButtonCesar;
+    private javax.swing.JButton decryptButtonVigenere;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JLabel labelCesar;
+    private javax.swing.JLabel labelAccion;
+    private javax.swing.JLabel labelAlgoritmo;
     private javax.swing.JLabel labelKey;
     private javax.swing.JLabel labelMessage;
     private javax.swing.JLabel labelResult;
-    private javax.swing.JLabel labelVigenere;
+    private javax.swing.JPanel panel2;
     private javax.swing.JPanel panelPrincipal;
+    private javax.swing.JRadioButton radioButtonCesar;
+    private javax.swing.JRadioButton radioButtonVigenere;
     private javax.swing.JTextArea textAreaMessage;
     private javax.swing.JTextArea textAreaResultMessage;
     private javax.swing.JTextField textFieldKey;
     // End of variables declaration//GEN-END:variables
+
 }
