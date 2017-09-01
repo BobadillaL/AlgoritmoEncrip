@@ -18,8 +18,8 @@ public abstract class AlgoritmoVigenere implements Encrypting{
     
     public AlgoritmoVigenere(String sentence, String sentenceKey) {
         
-        this.sentence = sentence;
-        this.sentenceKey = sentenceKey;
+        this.sentence = sentence.toLowerCase();
+        this.sentenceKey = sentenceKey.toLowerCase();
     }
   
     
@@ -31,10 +31,19 @@ public abstract class AlgoritmoVigenere implements Encrypting{
         char[] charactersKey = sentenceKey.toCharArray();      
        
         char[] resul = characters.clone();
-        char[] key = completeKey(characters, charactersKey);
+        int j = 0;
         
+        //Si el tamaño de la clave es menor al del mensaje
+        //se debe repetir la clave hasta completar dicho tamaño
         for(int i = 0; i< characters.length; i++){
-            resul[i]= transformCode(characters[i], key[i]);
+            if(i >= (charactersKey.length)){ 
+               resul[i]= transformCode(characters[i], charactersKey[j]);
+               j++;
+               if(j==charactersKey.length)
+                  j= 0; 
+            }
+            else resul[i]= transformCode(characters[i], charactersKey[i]);
+            
         }
         
         return result = String.valueOf(resul);
@@ -87,10 +96,19 @@ public abstract class AlgoritmoVigenere implements Encrypting{
         char[] charactersKey = sentenceKey.toCharArray();      
        
         char[] resul = characters.clone();
-        char[] key = completeKey(characters, charactersKey);
+        int j = 0;
         
+        //Si el tamaño de la clave es menor al del mensaje
+        //se debe repetir la clave hasta completar dicho tamaño
         for(int i = 0; i< characters.length; i++){
-            resul[i]= transformDecrypt(characters[i], key[i]);
+            if(i >= (charactersKey.length)){ 
+               resul[i]= transformDecrypt(characters[i], charactersKey[j]);
+               j++;
+               if(j==charactersKey.length)
+                  j= 0; 
+            }
+            else resul[i]= transformDecrypt(characters[i], charactersKey[i]);
+            
         }
         
         return result = String.valueOf(resul);
@@ -107,16 +125,6 @@ public abstract class AlgoritmoVigenere implements Encrypting{
         return 0;
     }
     
-
-    //Si el tamaño de la clave es menor al tamaño del mensaje, es necesario
-    //repetir la clave
-    private char[] completeKey(char[] characters, char[] charactersKey) {
-    
-        char[] keyComplete = charactersKey.clone();
-        
-        
-        return keyComplete;
-    }
     
     @Override
     public String toString() {

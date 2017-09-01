@@ -8,6 +8,9 @@ package view;
 import algoritmoencriptado.AlgoritmoCesar;
 import algoritmoencriptado.AlgoritmoVigenere;
 import java.awt.event.ActionEvent;
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -22,7 +25,7 @@ public class View extends javax.swing.JFrame {
      * Creates new form ViewCaesar
      */
     public View() {
-        this.setTitle("TRABAJO PRACTICO N°1 - ALGORITMOS DE ENCRIPTACION");
+        this.setTitle("TRABAJO PRACTICO N°1 - CRIPTOGRAFIA SIMETRICA");
         initComponents();
     }
 
@@ -55,6 +58,7 @@ public class View extends javax.swing.JFrame {
         comboBoxKey = new javax.swing.JComboBox();
         decryptButtonCesar = new javax.swing.JButton();
         decryptButtonVigenere = new javax.swing.JButton();
+        bruteForceButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -146,6 +150,13 @@ public class View extends javax.swing.JFrame {
             }
         });
 
+        bruteForceButton.setText("Force Cesar");
+        bruteForceButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bruteForceButtonActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout panelPrincipalLayout = new javax.swing.GroupLayout(panelPrincipal);
         panelPrincipal.setLayout(panelPrincipalLayout);
         panelPrincipalLayout.setHorizontalGroup(
@@ -180,7 +191,9 @@ public class View extends javax.swing.JFrame {
                     .addComponent(panel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(panelPrincipalLayout.createSequentialGroup()
-                        .addComponent(labelResult)
+                        .addGroup(panelPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(labelResult)
+                            .addComponent(bruteForceButton))
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
@@ -213,7 +226,9 @@ public class View extends javax.swing.JFrame {
                 .addComponent(labelResult)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 12, Short.MAX_VALUE)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(45, 45, 45))
+                .addGap(4, 4, 4)
+                .addComponent(bruteForceButton)
+                .addContainerGap())
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -233,7 +248,8 @@ public class View extends javax.swing.JFrame {
     private void codeButtonCesarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_codeButtonCesarActionPerformed
         // TODO add your handling code here:
         if (evt.getSource() == codeButtonCesar) {
-            c = new AlgoritmoCesar(textAreaMessage.getText(), Integer.parseInt(comboBoxKey.getSelectedItem().toString())) {};
+            c = new AlgoritmoCesar(textAreaMessage.getText(), Integer.parseInt(comboBoxKey.getSelectedItem().toString())) {
+            };
             c.code();
         }
         textAreaResultMessage.setText(c.toString());
@@ -242,7 +258,8 @@ public class View extends javax.swing.JFrame {
     private void codeButtonVigenereActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_codeButtonVigenereActionPerformed
         // TODO add your handling code here:
         if (evt.getSource() == codeButtonVigenere) {
-            v = new AlgoritmoVigenere(textAreaMessage.getText(), textFieldKey.getText()) {};
+            v = new AlgoritmoVigenere(textAreaMessage.getText(), textFieldKey.getText()) {
+            };
             v.code();
         }
         textAreaResultMessage.setText(v.toString());
@@ -270,24 +287,42 @@ public class View extends javax.swing.JFrame {
     private void decryptButtonCesarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_decryptButtonCesarActionPerformed
         // TODO add your handling code here:
         if (evt.getSource() == decryptButtonCesar) {
-            c = new AlgoritmoCesar(textAreaMessage.getText(), Integer.parseInt(comboBoxKey.getSelectedItem().toString())) {};
+            c = new AlgoritmoCesar(textAreaMessage.getText(), Integer.parseInt(comboBoxKey.getSelectedItem().toString())) {
+            };
             c.decrypt();
         }
         textAreaResultMessage.setText(c.toString());
-        
+
     }//GEN-LAST:event_decryptButtonCesarActionPerformed
 
     private void decryptButtonVigenereActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_decryptButtonVigenereActionPerformed
         // TODO add your handling code here:
         if (evt.getSource() == decryptButtonVigenere) {
-            v = new AlgoritmoVigenere(textAreaMessage.getText(), textFieldKey.getText()) {};
+            v = new AlgoritmoVigenere(textAreaMessage.getText(), textFieldKey.getText()) {
+            };
             v.decrypt();
         }
         textAreaResultMessage.setText(v.toString());
 
     }//GEN-LAST:event_decryptButtonVigenereActionPerformed
 
-    private void toblock(ActionEvent evt) {
+    private void bruteForceButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bruteForceButtonActionPerformed
+        // TODO add your handling code here:
+        if (evt.getSource() == bruteForceButton) {
+            c = new AlgoritmoCesar() {
+            };
+            c.setSentence(textAreaResultMessage.getText());
+            try {
+ 
+                c.decryptBruteForce();
+            } catch (IOException ex) {
+                Logger.getLogger(View.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        
+    }//GEN-LAST:event_bruteForceButtonActionPerformed
+
+private void toblock(ActionEvent evt) {
 
         if (evt.getSource() == radioButtonCesar) {
             radioButtonVigenere.setEnabled(false);
@@ -332,16 +367,32 @@ public class View extends javax.swing.JFrame {
                 if ("Nimbus".equals(info.getName())) {
                     javax.swing.UIManager.setLookAndFeel(info.getClassName());
                     break;
-                }
+                
+
+}
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(View.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(View.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(View.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(View.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(View.class  
+
+.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } 
+
+catch (InstantiationException ex) {
+            java.util.logging.Logger.getLogger(View.class  
+
+.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } 
+
+catch (IllegalAccessException ex) {
+            java.util.logging.Logger.getLogger(View.class  
+
+.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } 
+
+catch (javax.swing.UnsupportedLookAndFeelException ex) {
+            java.util.logging.Logger.getLogger(View.class  
+
+.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
         //</editor-fold>
@@ -355,6 +406,7 @@ public class View extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton bruteForceButton;
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JButton codeButtonCesar;
     private javax.swing.JButton codeButtonVigenere;
